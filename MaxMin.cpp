@@ -6,7 +6,7 @@
 #include"MaxMin.h"
 #include"AI.h"
 //极大极小值搜索
-int MaxMin::MinMax(int depth)
+int MaxMin::MinMax(int board[15][15],int depth)
 {
 	return Max(depth);//因为从计算机胡角度来评估
 }
@@ -62,13 +62,18 @@ int MaxMin::GenerateLegalMoves()
 {
 	int neighbors[];
 	int nextNeighbors[];
-
+	int flag=0;
 	for(int i=0;i<15;i++)
 	{
 		for (int j = 0; j < 15; j++)
 		{
 			/* code */
-
+			if(board[i][j]==0)
+			{
+				x[flag]=i;
+				y[flag]=j;
+				flag++;
+			}
 		}
 	}
 }

@@ -9,7 +9,7 @@ public:
 		board=b;
 	};
 	~MaxMin();
-	int MinMax(int depth);
+	int MinMax(int board,int depth);
 	int Max(int depth);
 	int Min(int depth);
 	int GenerateLegalMoves();
@@ -19,5 +19,7 @@ public:
 private:
 	int depth;
 	int board[15][15];
-}
+	int x[225];
+	int y[225];
+};
 #endif
