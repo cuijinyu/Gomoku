@@ -4,16 +4,25 @@
 **
 ***/
 #include"MaxMin.h"
+#define WHITE -1
+#define BLACK 1
 #include"AI.h"
 //极大极小值搜索
-int MaxMin::MinMax(int board[15][15],int depth)
-{
-	return Max(depth);//因为从计算机胡角度来评估
+int MaxMin::MinMax(int depth)
+{//
+	if(SideToMove()==WHITE)
+	{
+		return Max(depth);//因为从计算机的角度来评估
+	}else
+	{
+		return Min(depth);
+	}
 }
 
 
 int MaxMin::Max(int depth)
 {
+	flagMove=0;
 	int best=-INFINITY;
 	if (depth<=0)
 	{
@@ -37,6 +46,7 @@ int MaxMin::Max(int depth)
 
 int MaxMin::Min(int depth)
 {
+	flagMove=0;
 	int best=INFINITY;
 	if (depth<=0)
 	{
@@ -60,9 +70,19 @@ int MaxMin::Min(int depth)
 //生成每一步有空位的点
 int MaxMin::GenerateLegalMoves()
 {
-	int neighbors[];
-	int nextNeighbors[];
-	int flag=0;
+	//清空以前存储位置数组中存储的信息
+	if(flag>0){	
+		for(int i=0;i<=flag;i++)
+		{
+			for(int j=0;j<=flag;j++)
+			{
+				x[flag]=-1;
+				y[flag]=-1;
+			}
+		}
+	};
+	//重新标志位置，并存储新的信息
+	flag=0;
 	for(int i=0;i<15;i++)
 	{
 		for (int j = 0; j < 15; j++)
@@ -78,18 +98,49 @@ int MaxMin::GenerateLegalMoves()
 	}
 }
 
-int MaxMin::MakeNextMove()
+//尝试下一个子
+void MaxMin::MakeNextMove()
 {
-	
+		tryOne=0;
+		tryOne=rand()%(flag+1);
+		color=SideToMove();
+		board[tryOne][tryOne]=color;
+}
+
+//取消当前尝试下的子
+void MaxMin::UnMakeMoves()
+{
+		board[tryOne][tryOne]=0;
 }
 
 
-int MaxMin::UnMakeMoves()
-{
-	
-}
-
+//遍历所有可以下的棋子
 int MaxMin::MovesLeft()
+{ 
+	if(flagMove<flag)
+	{
+		if(x[flagMove]>=0)
+		{
+			flagMove++;
+			return true;
+		}else
+		{
+			return false;
+		}
+	}else
+	{
+		return false;
+	}	
+}
+
+//判断当前下子方函数
+int MaxMin::SideToMove()
 {
-	
+	if(color==1)
+	{
+		return WHITE;
+	}else if(color==-1)
+	{	
+		return BLACK;
+	}
 }
