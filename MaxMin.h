@@ -14,8 +14,8 @@ public:
 	~MaxMin();
 	int Evaluate();
 	int MinMax(int depth);
-	int Max(int depth);
-	int Min(int depth);
+	int Max(int depth,int alpha,int beta);
+	int Min(int depth,int alpha,int beta);
 	int GenerateLegalMoves();
 	void MakeNextMove();
 	void UnMakeMoves();

@@ -7,12 +7,13 @@
 #include<math.h>
 #include<stdlib.h>
 #include<time.h>
+#include"point.h"
 #define WHITE -1
 #define BLACK 1
 using namespace std;
 //#include"AI.h"
 //极大极小值搜索
-int MaxMin::MinMax(int depth)
+int MaxMin::MinMax(int depth,int alpha,int beta)
 {//
 	if(SideToMove()==WHITE)
 	{
@@ -24,7 +25,7 @@ int MaxMin::MinMax(int depth)
 }
 
 
-int MaxMin::Max(int depth)
+int MaxMin::Max(int depth,int alpha,int beta)
 {
 	flagMove=0;
 	int best=-INFINITY;
@@ -37,12 +38,17 @@ int MaxMin::Max(int depth)
 	while(MovesLeft())//遍历所有着点
 	{
 		MakeNextMove();//实施着法
-		val=Min(depth-1);
+		val=Min(depth-1,alpha,best>alpha?best:alpha);
 		UnMakeMoves();//撤销当前走法
 		if (val>best)
 		{
 			/* code */
 			best=val;
+		}
+		if(val>alpha)
+		{
+			ABcut++;
+			break;
 		}
 	}
 	return best;
@@ -52,6 +58,7 @@ int MaxMin::Min(int depth)
 {
 	flagMove=0;
 	int best=INFINITY;
+	int value=Evaluate();
 	if (depth<=0)
 	{
 		/* code */
@@ -61,11 +68,17 @@ int MaxMin::Min(int depth)
 	while(MovesLeft())//遍历所有着点
 	{
 		MakeNextMove();//实施着法
-		val=Max(depth-1);
+		val=Max(depth-1,best<alpha?best,alpha,beta);
 		UnMakeMoves();//撤销着法
 		if(val<best)
 		{
 			best=val;
+		}
+		if(val<beta)
+		{
+			//alpha-beta剪枝
+			ABcut++;
+			break;
 		}
 	}
 	return best;
@@ -80,8 +93,8 @@ int MaxMin::GenerateLegalMoves()
 		{
 			for(int j=0;j<=flag;j++)
 			{
-				x[flag]=-1;
-				y[flag]=-1;
+				points[flag].x=-1;
+				points[flag].y=-1;
 			}
 		}
 	};
@@ -94,9 +107,9 @@ int MaxMin::GenerateLegalMoves()
 			/* code */
 			if(board[i][j]==0)
 			{
-				x[flag]=i;
-				y[flag]=j;
-				flag++;
+				points[flag].x=i;
+				points[flag].y=j;
+				flag++;		
 			}
 		}
 	}
