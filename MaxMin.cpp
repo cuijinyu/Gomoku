@@ -4,9 +4,13 @@
 **
 ***/
 #include"MaxMin.h"
+#include<math.h>
+#include<stdlib.h>
+#include<time.h>
 #define WHITE -1
 #define BLACK 1
-#include"AI.h"
+using namespace std;
+//#include"AI.h"
 //极大极小值搜索
 int MaxMin::MinMax(int depth)
 {//
@@ -102,6 +106,7 @@ int MaxMin::GenerateLegalMoves()
 void MaxMin::MakeNextMove()
 {
 		tryOne=0;
+		srand((unsigned)time(NULL));
 		tryOne=rand()%(flag+1);
 		color=SideToMove();
 		board[tryOne][tryOne]=color;
@@ -115,7 +120,7 @@ void MaxMin::UnMakeMoves()
 
 
 //遍历所有可以下的棋子
-int MaxMin::MovesLeft()
+bool MaxMin::MovesLeft()
 { 
 	if(flagMove<flag)
 	{
@@ -144,3 +149,8 @@ int MaxMin::SideToMove()
 		return BLACK;
 	}
 }
+//Evaluate函数的实现
+int MaxMin::Evaluate()
+{
+	return 0;
+};

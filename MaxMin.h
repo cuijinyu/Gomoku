@@ -1,17 +1,25 @@
 class MaxMin
 {
 public:
-	MaxMin(int d,int b[][],int c):depth(d),board(b),color(c)
+	MaxMin(int d,int b[15][15],int c):depth(d),color(c)
 	{
+		for (int i = 0; i < 15; i++)
+		{
+			for (int j = 0; j < 15; j++)
+			{
+				board[i][j] = b[i][j];
+			}
+		}
 	};
 	~MaxMin();
-	int MinMax(int board,int depth);
+	int Evaluate();
+	int MinMax(int depth);
 	int Max(int depth);
 	int Min(int depth);
 	int GenerateLegalMoves();
 	void MakeNextMove();
 	void UnMakeMoves();
-	int MovesLeft();
+	bool MovesLeft();
 	int SideToMove();
 private:
 	int val;
