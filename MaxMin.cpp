@@ -8,12 +8,12 @@
 #include<stdlib.h>
 #include<time.h>
 #include"point.h"
+#include"AI.h"
 #define WHITE -1
 #define BLACK 1
 using namespace std;
-//#include"AI.h"
 //极大极小值搜索
-int MaxMin::MinMax(int depth,int alpha,int beta)
+int MaxMin::MinMax(int b[15][15],int depth)
 {//
 	if(SideToMove()==WHITE)
 	{
@@ -25,13 +25,38 @@ int MaxMin::MinMax(int depth,int alpha,int beta)
 }
 
 
+int MaxMin::Max(int depth)
+{
+	flagMove=0;
+	int best=-INFINITY;
+	if (depth<=0)
+	{
+		return AI::Judge();
+		/* code */
+	}
+	GenerateLegalMoves();
+	while(MovesLeft())//遍历所有着点
+	{
+		MakeNextMove();//实施着法
+		val=Min(depth-1);
+		UnMakeMoves();//撤销当前走法
+		if (val>best)
+		{
+			/* code */
+			best=val;
+		}
+	}
+	return best;
+}
+
+
 int MaxMin::Max(int depth,int alpha,int beta)
 {
 	flagMove=0;
 	int best=-INFINITY;
 	if (depth<=0)
 	{
-		return Evaluate();
+		return AI::Judge();
 		/* code */
 	}
 	GenerateLegalMoves();
@@ -58,11 +83,35 @@ int MaxMin::Min(int depth)
 {
 	flagMove=0;
 	int best=INFINITY;
-	int value=Evaluate();
 	if (depth<=0)
 	{
 		/* code */
-		return Evaluate();
+		return AI::Judge();
+	}
+	GenerateLegalMoves();
+	while(MovesLeft())//遍历所有着点
+	{
+		MakeNextMove();//实施着法
+		val=Max(depth-1);
+		UnMakeMoves();//撤销着法
+		if(val<best)
+		{
+			best=val;
+		}
+	}
+	return best;
+}
+
+
+int MaxMin::Min(int depth,int alpha,int beta)
+{
+	flagMove=0;
+	int best=INFINITY;
+	int value=AI::Judge();
+	if (depth<=0)
+	{
+		/* code */
+		return AI::Judge();
 	}
 	GenerateLegalMoves();
 	while(MovesLeft())//遍历所有着点
@@ -107,28 +156,41 @@ int MaxMin::GenerateLegalMoves()
 			/* code */
 			if(board[i][j]==0)
 			{
-				points[flag].x=i;
-				points[flag].y=j;
-				flag++;		
+				if(board[i-1][j]!=0 
+				|| board[i-2][j]!=0 
+				|| board[i][j-1]!=0 
+				|| board[i][j-2]!=0
+				|| board[i+1][j]!=0
+				|| board[i+2][j]!=0
+				|| board[i][j+1]!=0
+				|| board[i][j+2]!=0
+				|| board[i-1][j-1]!=0
+				|| board[i-1][j+1]!=0
+				|| board[i+1][j+1]!=0
+				|| board[i+1][j-1]!=0)
+				{
+					points[flag].x=i;
+					points[flag].y=j;
+				}
 			}
 		}
 	}
 }
 
 //尝试下一个子
+/*
+	此处实现仍有问题
+*/
 void MaxMin::MakeNextMove()
 {
-		tryOne=0;
-		srand((unsigned)time(NULL));
-		tryOne=rand()%(flag+1);
 		color=SideToMove();
-		board[tryOne][tryOne]=color;
+		board[flagMove][flagMove]=color;
 }
 
 //取消当前尝试下的子
 void MaxMin::UnMakeMoves()
 {
-		board[tryOne][tryOne]=0;
+		board[flagMove][flagMove]=0;
 }
 
 
@@ -137,7 +199,7 @@ bool MaxMin::MovesLeft()
 { 
 	if(flagMove<flag)
 	{
-		if(x[flagMove]>=0)
+		if(points[flagMove].x>=0)
 		{
 			flagMove++;
 			return true;
@@ -162,8 +224,3 @@ int MaxMin::SideToMove()
 		return BLACK;
 	}
 }
-//Evaluate函数的实现
-int MaxMin::Evaluate()
-{
-	return 0;
-};
