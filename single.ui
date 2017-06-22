@@ -30,24 +30,11 @@ QDialog
 	background:url(:/new/prefix1/chess.jpg)
 }</string>
   </property>
-  <widget class="QPushButton" name="containueBtn">
-   <property name="geometry">
-    <rect>
-     <x>1070</x>
-     <y>310</y>
-     <width>171</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>继续</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="stopBtn">
    <property name="geometry">
     <rect>
-     <x>1070</x>
-     <y>410</y>
+     <x>1020</x>
+     <y>470</y>
      <width>171</width>
      <height>51</height>
     </rect>
@@ -59,8 +46,8 @@ QDialog
   <widget class="QPushButton" name="backBtn">
    <property name="geometry">
     <rect>
-     <x>1070</x>
-     <y>510</y>
+     <x>1020</x>
+     <y>570</y>
      <width>171</width>
      <height>51</height>
     </rect>
@@ -72,30 +59,11 @@ QDialog
     <string>悔棋</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>1020</x>
-     <y>40</y>
-     <width>241</width>
-     <height>191</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font-size:160px;
-font: 48pt &quot;华文隶书&quot;;
-color:black;
-</string>
-   </property>
-   <property name="text">
-    <string>五子棋</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
+     <x>-1</x>
+     <y>-1</y>
      <width>291</width>
      <height>801</height>
     </rect>
@@ -130,6 +98,38 @@ color:black;
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="containueBtn">
+   <property name="geometry">
+    <rect>
+     <x>1020</x>
+     <y>370</y>
+     <width>171</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>继续</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>1000</x>
+     <y>80</y>
+     <width>241</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size:160px;
+font: 48pt &quot;华文隶书&quot;;
+color:black;
+</string>
+   </property>
+   <property name="text">
+    <string>五子棋</string>
+   </property>
   </widget>
  </widget>
  <resources/>

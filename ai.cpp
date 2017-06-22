@@ -21,25 +21,10 @@ void AI::HorJudge(int ay,int ax,int side)   //(ay,ax)表示当前要检索的点
         i--;
     }
     if(i<0)
-        ChessBoard[0][0]+=3;
+        ChessBoard[0][0]++;
     else
-    if(a[ay][i]==-side)
-        ChessBoard[0][0]+=3;
-    else
-    {
-        ChessBoard[0][0]+=3;
-        i--;
-        while(i>=0&&a[ay][i]==side)           //左
-        {
-            ChessBoard[0][1]++;
-            i--;
-        }
-        if(i<0)
-            ChessBoard[0][0]++;
-        else
-        if(a[ay][i]==-side)
-            ChessBoard[0][0]++;
-    }
+    if(a[ay][i]!=0)
+        ChessBoard[0][0]++;
 
 
     i=ax+1;								//右
@@ -49,25 +34,10 @@ void AI::HorJudge(int ay,int ax,int side)   //(ay,ax)表示当前要检索的点
         i++;
     }
     if(i>=15)
-        ChessBoard[0][0]+=3;
+        ChessBoard[0][0]++;
     else
-    if(a[ay][i]==-side)
-        ChessBoard[0][0]+=3;
-    else
-    {
-        ChessBoard[0][0]+=3;
-        i++;
-        while(i<15&&a[ay][i]==side)
-        {
-            ChessBoard[0][1]++;
-            i++;
-        }
-        if(i>=15)
-            ChessBoard[0][0]++;
-        else
-        if(a[ay][i]==-side)
-            ChessBoard[0][0]++;
-    }
+    if(a[ay][i]!=0)
+        ChessBoard[0][0]++;
 
     a[ay][ax]=0;          //当前点置零
 }
@@ -83,28 +53,11 @@ void AI::VerJudge(int ay,int ax,int side)
         i--;
     }
     if(i<0)
-        ChessBoard[1][0]+=3;
+        ChessBoard[1][0]++;
     else
-    if(a[i][ax]==-side)
+    if(a[i][ax]!=0)
     {
-        ChessBoard[1][0]+=3;
-    }
-    else
-    {
-        ChessBoard[1][0]+=3;
-        i--;
-        while(i>=0&&a[i][ax]==side)
-        {
-            ChessBoard[1][1]++;
-            i--;
-        }
-        if(i<0)
-            ChessBoard[1][0]++;
-        else
-        if(a[i][ax]==-side)
-        {
-            ChessBoard[1][0]++;
-        }
+        ChessBoard[1][0]++;
     }
 
     i=ay+1;
@@ -114,25 +67,10 @@ void AI::VerJudge(int ay,int ax,int side)
         i++;
     }
     if(i>=15)
-        ChessBoard[1][0]+=3;
+        ChessBoard[1][0]++;
     else
-    if(a[i][ax]==-side)
-        ChessBoard[1][0]+=3;
-    else
-    {
-        ChessBoard[1][0]+=3;
-        i++;
-        while(i<15&&a[i][ax]==side)
-        {
-            ChessBoard[1][1]++;
-            i++;
-        }
-        if(i>=15)
-            ChessBoard[1][0]++;
-        else
-        if(a[i][ax]==-side)
-            ChessBoard[1][0]++;
-    }
+    if(a[i][ax]!=0)
+        ChessBoard[1][0]++;
 
     a[ay][ax]=0;
 }
@@ -148,27 +86,10 @@ void AI::SprJudge(int ay,int ax,int side)
         j++;
     }
     if(i<0||j>=15)
-        ChessBoard[2][0]+=3;
+        ChessBoard[2][0]++;
     else
-    if(a[i][j]==-side)
-        ChessBoard[2][0]+=3;
-    else
-    {
-        ChessBoard[2][0]+=3;
-        i--;
-        j++;
-        while(i>=0&&j<15&&a[i][j]==side)
-        {
-            ChessBoard[2][1]++;
-            i--;
-            j++;
-        }
-        if(i<0||j>=15)
-            ChessBoard[2][0]++;
-        else
-        if(a[i][j]==-side)
-            ChessBoard[2][0]++;
-    }
+    if(a[i][j]!=0)
+        ChessBoard[2][0]++;
 
     i=ay+1;
     j=ax-1;
@@ -179,28 +100,11 @@ void AI::SprJudge(int ay,int ax,int side)
         j--;
     }
     if(i>=15||j<0)
-        ChessBoard[2][0]+=3;
+        ChessBoard[2][0]++;
     else
-    if(a[i][j]==-side)
+    if(a[i][j]!=0)
     {
-        ChessBoard[2][0]+=3;
-    }
-    else
-    {
-        ChessBoard[2][0]+=3;
-        i++;
-        j--;
-        while(i<15&&j>=0&&a[i][j]==side)
-        {
-            ChessBoard[2][1]++;
-            i++;
-            j--;
-        }
-        if(i>=15||j<0)
-            ChessBoard[2][0]++;
-        else
-        if(a[i][j]==-side)
-            ChessBoard[2][0]++;
+        ChessBoard[2][0]++;
     }
 
     a[ay][ax]=0;
@@ -217,33 +121,8 @@ void AI::BacJudge(int ay,int ax,int side)
         i--;
         j--;
     }
-    if(i<0||j<0)
-        ChessBoard[3][0]+=3;
-    else
-    if(a[i][j]==-side)
-    {
-        ChessBoard[3][0]+=3;
-    }
-    else
-    {
-        ChessBoard[3][0]+=3;
-        i--;
-        j--;
-        while(i>=0&&j>=0&&a[i][j]==side)
-        {
-            ChessBoard[3][1]++;
-            i--;
-            j--;
-        }
-        if(i<0||j<0)
-            ChessBoard[3][0]++;
-        else
-        if(a[i][j]==-side)
-        {
-            ChessBoard[3][0]++;
-        }
-    }
-
+    if(i<0||j<0||a[i][j]!=0)
+        ChessBoard[3][0]++;
 
     i=ay+1;
     j=ax+1;
@@ -253,28 +132,8 @@ void AI::BacJudge(int ay,int ax,int side)
         i++;
         j++;
     }
-    if(i>=15||j>=15)
-        ChessBoard[3][0]+=3;
-    else
-    if(a[i][j]==-side)
-        ChessBoard[3][0]+=3;
-    else
-    {
-        ChessBoard[3][0]+=3;
-        i++;
-        j++;
-        while(i<15&&j<15&&a[i][j]==side)
-        {
-            ChessBoard[3][1]++;
-            i++;
-            j++;
-        }
-        if(i>=15||j>=15)
-            ChessBoard[3][0]++;
-        else
-        if(a[i][j]==-side)
-            ChessBoard[3][0]++;
-    }
+    if(i>=15||j>=15||a[i][j]!=0)
+        ChessBoard[3][0]++;
 
     a[ay][ax]=0;
 }
@@ -284,10 +143,9 @@ bool AI::Five()
     int i=0;
     for(i=0;i<4;i++)
     {
-        if(ChessBoard[i][1]>=5)
-            return true;
+        if(ChessBoard[i][1]==5)
+            return true;          
     }
-
     return false;
 }
 
@@ -296,10 +154,9 @@ bool AI::A_four()
     int i=0;
     for(i=0;i<4;i++)
     {
-        if(ChessBoard[i][1]==4&&ChessBoard[i][0]<=2)
+        if(ChessBoard[i][1]==4&&ChessBoard[i][0]==0)
             return true;
     }
-
     return false;
 }
 
@@ -309,7 +166,7 @@ bool AI::Double_D_four()
     int number=0;
     for(i=0;i<4;i++)
     {
-        if(ChessBoard[i][1]==4&&ChessBoard[i][0]>=3)
+        if(ChessBoard[i][1]==4&&ChessBoard[i][0]==1)
             number++;
     }
 
@@ -325,7 +182,7 @@ bool AI::D_four_A_three()
     int number=0;
     for(i=0;i<4;i++)
     {
-        if((ChessBoard[i][1]==4&&ChessBoard[i][0]>=3)||(ChessBoard[i][1]==3&&ChessBoard[i][0]==0))
+        if((ChessBoard[i][1]==4&&ChessBoard[i][0]==1)||(ChessBoard[i][1]==3&&ChessBoard[i][0]==0))
             number++;
     }
 
@@ -356,7 +213,7 @@ bool AI::D_three_A_three()
     int number=0;
     for(i=0;i<4;i++)
     {
-        if((ChessBoard[i][1]==3&&(ChessBoard[i][0]==3||ChessBoard[i][0]==6))||(ChessBoard[i][1]==3&&ChessBoard[i][0]==0))
+        if((ChessBoard[i][1]==3&&ChessBoard[i][0]==0)||(ChessBoard[i][1]==3&&ChessBoard[i][0]==1))
             number++;
     }
     if(number>=2)
@@ -370,10 +227,9 @@ bool AI::D_four()
     int i=0;
     for(i=0;i<4;i++)
     {
-        if(ChessBoard[i][1]==4&&(ChessBoard[i][0]==3||ChessBoard[i][0]==6))
+        if(ChessBoard[i][1]==4&&ChessBoard[i][0]==1)
             return true;
     }
-
     return false;
 }
 
@@ -385,7 +241,6 @@ bool AI::A_three()
         if(ChessBoard[i][1]==3&&ChessBoard[i][0]==0)
             return true;
     }
-
     return false;
 }
 
@@ -412,7 +267,6 @@ bool AI::D_three()
         if(ChessBoard[i][1]==3&&ChessBoard[i][0]==1)
             return true;
     }
-
     return false;
 }
 
@@ -424,7 +278,6 @@ bool AI::A_two()
         if(ChessBoard[i][1]==2&&ChessBoard[i][0]==0)
             return true;
     }
-
     return false;
 }
 
@@ -436,8 +289,7 @@ bool AI::D_two()
         if(ChessBoard[i][1]==2&&ChessBoard[i][0]==1)
             return true;
     }
-
-    return false;
+     return false;
 }
 
 bool AI::One()
@@ -448,7 +300,6 @@ bool AI::One()
         if(ChessBoard[i][1]==1&&ChessBoard[i][0]<=1)
             return true;
     }
-
     return false;
 }
 
@@ -636,6 +487,9 @@ int AI::gety()
 {
     return yi;
 }
+
+
+
 
 
 

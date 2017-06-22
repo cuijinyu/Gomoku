@@ -38,7 +38,7 @@ doubled::doubled(QDialog *parent) :QDialog(parent),ui(new Ui::doubled),ai()
    // this->setPalette(*pal);
 //  <Menu>
     Menu->addAction(tr("新游戏"), this, SLOT(Play()), tr("Ctrl+N"));
-    //Menu->addAction(tr("退出"), qApp, SLOT(quit()), tr("Ctrl+Q"));
+    Menu->addAction(tr("退出"), qApp, SLOT(quit()), tr("Ctrl+Q"));
     Menu->setTitle("菜单");
 
     menuBar->addMenu(Menu);

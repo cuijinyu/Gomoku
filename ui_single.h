@@ -9,7 +9,6 @@
 #ifndef UI_SINGLE_H
 #define UI_SINGLE_H
 
-
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
@@ -45,18 +44,18 @@ public:
         single->setMaximumSize(QSize(1280, 800));
         single->setStyleSheet(QString::fromUtf8("QPushButton\n"
 "{\n"
-"   border:3px;\n"
-"   background-color:rgb(170, 85, 0);\n"
-"   color:white;\n"
-"   font: 75 12pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
+"	border:3px;\n"
+"	background-color:rgb(170, 85, 0);\n"
+"	color:white;\n"
+"	font: 75 12pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "}\n"
 "QPushButton:hover\n"
 "{\n"
-"   background-color:rgb(170, 170, 0)\n"
+"	background-color:rgb(170, 170, 0)\n"
 "}\n"
 "QDialog\n"
 "{\n"
-"   background:url(:/new/prefix1/chess.jpg)\n"
+"	background:url(:/new/prefix1/chess.jpg)\n"
 "}"));
         containueBtn = new QPushButton(single);
         containueBtn->setObjectName(QStringLiteral("containueBtn"));

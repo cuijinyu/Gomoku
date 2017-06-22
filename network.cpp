@@ -238,7 +238,8 @@ void network::Play()
     memset(&si,0,sizeof(STARTUPINFO));
     si.cb = sizeof(STARTUPINFO);
     si.dwFlags = STARTF_USESHOWWINDOW;
-    si.wShowWindow = SW_HIDE;
+    si.wShowWindow = SW_HIDE
+            ;
     QMessageBox messageBox(QMessageBox::Warning,"选择提示","      是否先手？",QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel,NULL);
     messageBox.setStyleSheet("font:14pt");
     int message = messageBox.exec();

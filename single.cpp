@@ -66,7 +66,6 @@ single::single(QDialog *parent) :QDialog(parent),ui(new Ui::single),ai()
 }
 /*single::single():ai()
 {
-
 }*/
 
 void single::geta()
@@ -110,6 +109,7 @@ single::~single()
 void single::Play()
 {
     resetChessBoard();
+    lineEdit->setText("");
     beginPlay = true;
     chess_color = 1;
     chess_order = 0;
@@ -138,6 +138,18 @@ void single::takeBack()
     {
         if(chess_order == 0)
             return;
+        int times = 0;
+        for(int i=0;i<15;i++)
+            for(int j=0;j<15;j++)
+                if(chess[i][j][1] == chess_order)
+                {
+                    chess[i][j][1] = 0;
+                    chess[i][j][0] = 0;
+                    chess_order--;
+                    chess_color = -chess_color;
+                    goto second;
+                }
+        second:
         for(int i=0;i<15;i++)
             for(int j=0;j<15;j++)
                 if(chess[i][j][1] == chess_order)
@@ -246,7 +258,6 @@ void single::paintEvent(QPaintEvent *)
     {
         paint->drawLine(x+WIDTH*i,y,x+WIDTH*i,y+WIDTH*(SIZE));
     }
-
     /*int an=0;
     an=an+100;
     chess[an][15][0]=10;*/
@@ -267,12 +278,9 @@ void single::paintEvent(QPaintEvent *)
                     chess_color = -chess_color;
                     chess[xx][yy][1] = ++chess_order;
                     // record the accurate mouse location to judge whether win or not
-                    mouse_x = toRealX(yy);
-                    mouse_y = toRealY(xx);
+                    mouse_x = toRealX(xx);
+                    mouse_y = toRealY(yy);
                 }
-                // record the accurate mouse location to judge whether win or not
-                mouse_x = x;
-                mouse_y = y;
             }
         }
         else
