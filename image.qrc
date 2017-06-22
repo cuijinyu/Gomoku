@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>chess.jpg</file>
+        <file>timg.jpg</file>
+    </qresource>
+</RCC>
